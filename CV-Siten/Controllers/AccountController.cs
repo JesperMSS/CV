@@ -49,14 +49,14 @@ namespace CV_Siten.Controllers
         {
             using (DB db = new DB())
             {
+                try {
                 var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
-                if (usr != null)
-                {
+          
                     Session["UserId"] = usr.UserID.ToString();
                     Session["Username"] = usr.Username.ToString();
                     return RedirectToAction("LoggedIn");
                 }
-                else
+                catch(Exception e)
                 {
                     ModelState.AddModelError("", "Användarnamn eller lösenord är fel.");
                 }
