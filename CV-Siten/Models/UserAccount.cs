@@ -18,7 +18,7 @@ namespace CV_Siten.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Du måste ange en mailadress")]
-    //[RegularExpression(@"^([a - zA - Z0 - 9_\-\.] +)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{ 1,3}\.)| (([a - zA - Z0 - 9\-] +\.)+))([a - zA - Z]{ 2,4}|[0 - 9]{ 1,3})(\]?)$)", ErrorMessage = "Du måste ange en giltlig email")]
+        [RegularExpression(@"^[\w!#$%&'+-/=?^_`{|}~]+(.[\w!#$%&'+-/=?^_`{|}~]+)*"+ "@"+ @"((([-\w]+.)+[a-zA-Z]{2,4})|(([0-9]{1,3}.){3}[0-9]{1,3}))$", ErrorMessage = "Du måste ange en giltlig email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Du måste ange ett Username")]
