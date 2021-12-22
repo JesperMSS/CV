@@ -23,7 +23,11 @@
                     <li>@Html.ActionLink("Hem", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
                     <li>@Html.ActionLink("Registrera användare", "Register", "Account")</li> @*Den här är rätt!!!*@
-                    <li>@Html.ActionLink("Logga in", "Login", "Account")</li>
+                    @if (Session["UserID"] != null)
+                    {
+                    <li>@Html.ActionLink("Inloggad", "LoggedIn", "Account")</li>
+                    }
+                    else {<li>@Html.ActionLink("Logga in", "Login", "Account")</li>}
                 </ul>
             </div>
         </div>
