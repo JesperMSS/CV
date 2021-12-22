@@ -52,13 +52,13 @@ namespace CV_Siten.Controllers
                 var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
                 if (usr != null)
                 {
-                    Session["UserId"] = user.UserID.ToString();
+                    Session["UserId"] = usr.UserID.ToString();
                     Session["Username"] = usr.Username.ToString();
-                    return RedirectToAction("Logged in");
+                    return RedirectToAction("LoggedIn");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Username eller Password är fel.");
+                    ModelState.AddModelError("", "Användarnamn eller lösenord är fel.");
                 }
             }
         return View();
