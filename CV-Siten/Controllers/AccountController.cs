@@ -32,9 +32,13 @@ namespace CV_Siten.Controllers
                 {
                     db.userAccount.Add(account);
                     db.SaveChanges();
+                    var usr = db.userAccount.Single(u => u.Username == account.Username && u.Password == account.Password);
+                    Session["UserId"] = usr.UserID.ToString();
+                    Session["Username"] = usr.Username.ToString();
+                    return RedirectToAction("LoggedIn");
                 }
-                ModelState.Clear();
-                ViewBag.Message = account.FirstName + " " + account.LastName + " registrerades";
+     
+     
             }
             return View();
         }
