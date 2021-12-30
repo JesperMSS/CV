@@ -12,5 +12,7 @@ namespace CV_Siten.Models
         public DbSet<Competences> Competences { get; set; }
 
         public System.Data.Entity.DbSet<CV_Siten.Models.Project> Projects { get; set; }
+
+        public System.Data.Entity.DbSet<CV_Siten.Models.Workplace> Workplaces { get; set; }
     }
 }
