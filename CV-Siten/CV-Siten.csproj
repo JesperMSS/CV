@@ -141,7 +141,12 @@
     <Compile Include="Migrations\202112301532043_first migration.Designer.cs">
       <DependentUpon>202112301532043_first migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112301550063_testing new.cs" />
+    <Compile Include="Migrations\202112301550063_testing new.Designer.cs">
+      <DependentUpon>202112301550063_testing new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Workplace.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Competences.cs" />
     <Compile Include="Models\DB.cs" />
@@ -215,6 +220,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202112301532043_first migration.resx">
       <DependentUpon>202112301532043_first migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112301550063_testing new.resx">
+      <DependentUpon>202112301550063_testing new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
