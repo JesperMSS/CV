@@ -9,5 +9,7 @@ namespace CV_Siten.Models
     public class DB : DbContext
     {
         public DbSet<UserAccount> userAccount { get; set; }
+
+        public DbSet<Projekt> Projekts { get; set; }
     }
 }
