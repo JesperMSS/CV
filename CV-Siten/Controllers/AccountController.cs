@@ -14,7 +14,7 @@ namespace CV_Siten.Controllers
         {
             using (DB db = new DB())
             {
-                return View(db.userAccount.ToList());
+                return View(db.UserAccounts.ToList());
             }
         }
 
@@ -30,14 +30,14 @@ namespace CV_Siten.Controllers
             {
                 using(DB db = new DB())
                 {
-                    UserAccount email = db.userAccount.FirstOrDefault(u => u.Email.ToString().ToLower() == account.Email.ToString().ToLower());
+                    UserAccount email = db.UserAccounts.FirstOrDefault(u => u.Email.ToString().ToLower() == account.Email.ToString().ToLower());
                     try
                     {
                         if (email == null)
                         {
-                            db.userAccount.Add(account);
+                            db.UserAccounts.Add(account);
                             db.SaveChanges();
-                            var usr = db.userAccount.Single(u => u.Username == account.Username && u.Password == account.Password);
+                            var usr = db.UserAccounts.Single(u => u.Username == account.Username && u.Password == account.Password);
                             Session["UserId"] = usr.UserID.ToString();
                             Session["Username"] = usr.Username.ToString();
                             return RedirectToAction("LoggedIn");
@@ -68,7 +68,7 @@ namespace CV_Siten.Controllers
             using (DB db = new DB())
             {
                 try {
-                        var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
+                        var usr = db.UserAccounts.Single(u => u.Username == user.Username && u.Password == user.Password);
                         Session["UserId"] = usr.UserID.ToString();
                         Session["Username"] = usr.Username.ToString();
                         return RedirectToAction("LoggedIn");

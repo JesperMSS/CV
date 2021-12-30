@@ -17,12 +17,25 @@ namespace CV_Siten.Controllers
             {
                 using (DB db = new DB())
                 {
-                    
-                    
-                        db.Competences.Add(competence);
-                        db.SaveChanges();
-                    
-                    
+                    try
+                    {
+                        Competences competences = db.Competences.FirstOrDefault(u => u.Name.ToString().ToLower() == competence.Name.ToString().ToLower());
+
+                        if (competences == null)
+                        {
+                            db.Competences.Add(competence);
+                            db.SaveChanges();
+                        }
+
+                        else
+                        {
+                            ModelState.AddModelError("Name", "Kompetensen finns redan!");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", (e));
+                    }
                 }
             }
                 return View();
@@ -33,4 +46,5 @@ namespace CV_Siten.Controllers
             return View();
         }
     }
-} 
+}
+
