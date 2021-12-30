@@ -30,12 +30,26 @@ namespace CV_Siten.Controllers
             {
                 using(DB db = new DB())
                 {
-                    db.userAccount.Add(account);
-                    db.SaveChanges();
-                    var usr = db.userAccount.Single(u => u.Username == account.Username && u.Password == account.Password);
-                    Session["UserId"] = usr.UserID.ToString();
-                    Session["Username"] = usr.Username.ToString();
-                    return RedirectToAction("LoggedIn");
+                    UserAccount email = db.userAccount.FirstOrDefault(u => u.Email.ToString().ToLower() == account.Email.ToString().ToLower());
+                    try
+                    {
+                        if (email == null)
+                        {
+                            db.userAccount.Add(account);
+                            db.SaveChanges();
+                            var usr = db.userAccount.Single(u => u.Username == account.Username && u.Password == account.Password);
+                            Session["UserId"] = usr.UserID.ToString();
+                            Session["Username"] = usr.Username.ToString();
+                            return RedirectToAction("LoggedIn");
+                        }
+                        else {
+                            ModelState.AddModelError("Email", "Email adress finns redan. Vänligen ange en annan email!");
+                        }
+                    }catch (Exception  e)
+                    {
+                        ModelState.AddModelError("", (e));
+                    }
+       
                 }
      
      
@@ -54,11 +68,10 @@ namespace CV_Siten.Controllers
             using (DB db = new DB())
             {
                 try {
-                var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
-          
-                    Session["UserId"] = usr.UserID.ToString();
-                    Session["Username"] = usr.Username.ToString();
-                    return RedirectToAction("LoggedIn");
+                        var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
+                        Session["UserId"] = usr.UserID.ToString();
+                        Session["Username"] = usr.Username.ToString();
+                        return RedirectToAction("LoggedIn");
                 }
                 catch(Exception e)
                 {
