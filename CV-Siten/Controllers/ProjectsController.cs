@@ -128,5 +128,48 @@ namespace CV_Siten.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult MyProjects()
+        {
+            var projects = db.Projects.Include(p => p.UserAccount);
+            return View(projects.ToList());
+        }
+
+        
+        // GET: Projects/Edit/5
+        public ActionResult MyProjectEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            
+           
+            return View(project);
+        }
+
+        // POST: Projects/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyProjectEdit([Bind(Include = "Id,Title,desc,ProjektManager")] Project project)
+        { 
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ProjektManager = new SelectList(db.UserAccounts, "UserID", "FirstName", project.ProjektManager);
+            return View(project);
+        }
     }
 }
+
+

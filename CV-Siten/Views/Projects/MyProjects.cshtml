@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CV_Siten.Models.Project>
+
+@{
+    ViewBag.Title = "MyProjects";
+}
+
+<h2>MyProjects</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAccount.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.desc)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        int myInt = Int32.Parse(Session["UserID"].ToString());
+
+        if(myInt == item.ProjektManager)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAccount.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.desc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "MyProjectEdit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+            
+        }else
+                {
+                    <p>@Session["UserID"].GetType() random item @item.ProjektManager.GetType() </p>
+
+                }
+    }
+
+</table>

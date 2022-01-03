@@ -206,6 +206,8 @@
     <Content Include="Views\Workplaces\Details.cshtml" />
     <Content Include="Views\Workplaces\Edit.cshtml" />
     <Content Include="Views\Workplaces\Index.cshtml" />
+    <Content Include="Views\Projects\MyProjects.cshtml" />
+    <Content Include="Views\Projects\MyProjectEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
